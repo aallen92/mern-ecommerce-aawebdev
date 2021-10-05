@@ -3,6 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const productRoutes = require('./routes/productRoutes');
+const authRoutes = require('./routes/authRoutes');
+const privateRoutes = require('./routes/privateRoutes');
+const errorHandler = require('./middleware/error')
 
 connectDB();
 
@@ -12,6 +15,12 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/products', productRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api/private', privateRoutes)
+
+// Error Handler (Should be last piece of middleware)
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
