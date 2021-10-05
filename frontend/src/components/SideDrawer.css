@@ -40,7 +40,27 @@
   font-size: 1.6rem;
 }
 
+.sidedrawer__links > li > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+  padding: 1rem;
+  text-decoration: none;
+  color: #171717;
+  font-size: 1.6rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 .sidedrawer__links > li > a:hover {
+  background-color: #171717;
+  color: #f4f4f4;
+}
+
+.sidedrawer__links > li > button:hover {
   background-color: #171717;
   color: #f4f4f4;
 }

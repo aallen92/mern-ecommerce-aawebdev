@@ -1,17 +1,28 @@
 import React from 'react'
 import './Navbar.css';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { signOutUser } from '../redux/actions/userActions';
 
 
-const Navbar = ({ click, signedIn, logoutClick }) => {
+const Navbar = ({ click }) => {
 
+    const user = useSelector(state => state.user);
     const cart = useSelector(state => state.cart);
+    const dispatch = useDispatch();
+
     const { cartItems } = cart;
+    const signedIn = user.signedIn.signedIn
     
 
     const getCartCount = () => {
         return cartItems.reduce((qty, item) => qty + Number(item.qty), 0);
+    }
+
+    const logoutClick = () => {
+        dispatch(signOutUser());
+        localStorage.removeItem("authToken");
+        console.log(signedIn);
     }
 
     return (

@@ -20,21 +20,26 @@ import SideDrawer from './components/SideDrawer';
 
 // Routing
 import PrivateRoute from './components/routing/PrivateRoute';
+import { signInUser, signOutUser } from './redux/actions/userActions';
+import { useDispatch } from 'react-redux';
 
 function App() {
 
   const [sideToggle, setSideToggle] = useState(false);
-  const [signedIn, setSignedIn] = useState(false);
-
+  const dispatch = useDispatch();
+  
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
-      setSignedIn(true);
+        dispatch(signInUser());
     }
-  },[]);
+    else {
+      dispatch(signOutUser());
+    }
+  },[dispatch]);
 
   return (
     <Router>
-      <Navbar click={() => setSideToggle(true)} signedIn={signedIn} logoutClick={() => localStorage.removeItem("authToken")} />
+      <Navbar click={() => setSideToggle(true)} />
       <SideDrawer show={sideToggle} click={() => setSideToggle(false)} />
       <Backdrop show={sideToggle} click={() => setSideToggle(false)} />
       <main>

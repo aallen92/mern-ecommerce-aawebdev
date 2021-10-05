@@ -2,17 +2,21 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./LoginScreen.css";
+import { useDispatch } from "react-redux";
+import { signInUser } from "../redux/actions/userActions";
 
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
+      dispatch(signInUser());
       history.push("/");
     }
-  }, [history]);
+  }, [dispatch, history]);
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -31,7 +35,7 @@ const LoginScreen = ({ history }) => {
       );
 
       localStorage.setItem("authToken", data.token);
-
+      dispatch(signInUser(true));
       history.push("/");
     } catch (error) {
       setError(error.response.data.error);
