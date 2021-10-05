@@ -16,7 +16,7 @@ const PrivateScreen = () => {
       };
 
       try {
-        const { data } = await axios.get("/api/private", config);
+        const { data } = await axios.get("https://mern-ecommerce-aawebdev.herokuapp.com/api/private", config);
         setPrivateData(data.data);
       } catch (error) {
         localStorage.removeItem("authToken");

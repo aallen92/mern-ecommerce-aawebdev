@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 
-const Navbar = ({click}) => {
+const Navbar = ({ click, signedIn, logoutClick }) => {
 
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart;
+    
 
     const getCartCount = () => {
         return cartItems.reduce((qty, item) => qty + Number(item.qty), 0);
     }
+
     return (
         <nav className='navbar'>
            <div className='navbar__logo'>
@@ -38,10 +40,15 @@ const Navbar = ({click}) => {
                         Shop
                     </Link>
                 </li>
-                <li>
+                <li className={signedIn ? "hidden" : ""}>
                     <Link to='/login'>
                         Log In
                     </Link>
+                </li>
+                <li className={signedIn ? "" : "hidden"}>
+                    <button onClick={logoutClick}>
+                        Log Out
+                    </button>
                 </li>
             </ul>
             <div className="hamburger__menu" onClick={click}>

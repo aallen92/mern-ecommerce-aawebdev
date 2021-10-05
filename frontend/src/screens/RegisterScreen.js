@@ -30,7 +30,7 @@ const RegisterScreen = ({ history }) => {
 
     try {
       const { data } = await axios.post(
-        "/api/auth/register",
+        "https://mern-ecommerce-aawebdev.herokuapp.com/api/auth/register",
         {
           username,
           email,

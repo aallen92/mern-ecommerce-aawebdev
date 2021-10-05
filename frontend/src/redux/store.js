@@ -19,7 +19,7 @@ const cartFromLocalStorage = localStorage.getItem("cart") ? JSON.parse(localStor
 const INITIAL_STATE = {
     cart: {
         cartItems: cartFromLocalStorage
-    }
+    },
 }
 
 const store = createStore(

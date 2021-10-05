@@ -30,7 +30,7 @@ const ResetPasswordScreen = ({ history, match }) => {
 
     try {
       const { data } = await axios.put(
-        `/api/auth/passwordreset/${match.params.resetToken}`,
+        `https://mern-ecommerce-aawebdev.herokuapp.com/api/auth/passwordreset/${match.params.resetToken}`,
         {
           password,
         },

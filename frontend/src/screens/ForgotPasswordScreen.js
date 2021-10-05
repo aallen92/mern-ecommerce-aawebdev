@@ -18,7 +18,7 @@ const ForgotPasswordScreen = () => {
 
     try {
       const { data } = await axios.post(
-        "/api/auth/forgotpassword",
+        "https://mern-ecommerce-aawebdev.herokuapp.com/api/auth/forgotpassword",
         { email },
         config
       );

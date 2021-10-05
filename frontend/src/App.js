@@ -1,5 +1,5 @@
 import './App.css';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
@@ -24,10 +24,17 @@ import PrivateRoute from './components/routing/PrivateRoute';
 function App() {
 
   const [sideToggle, setSideToggle] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      setSignedIn(true);
+    }
+  },[]);
 
   return (
     <Router>
-      <Navbar click={() => setSideToggle(true)} />
+      <Navbar click={() => setSideToggle(true)} signedIn={signedIn} logoutClick={() => localStorage.removeItem("authToken")} />
       <SideDrawer show={sideToggle} click={() => setSideToggle(false)} />
       <Backdrop show={sideToggle} click={() => setSideToggle(false)} />
       <main>
