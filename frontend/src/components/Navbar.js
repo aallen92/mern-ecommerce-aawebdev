@@ -15,9 +15,11 @@ const Navbar = ({click}) => {
     return (
         <nav className='navbar'>
            <div className='navbar__logo'>
-                <h2>
-                    MERN Ecommerce Site
-                </h2>
+               <Link to='/'>
+                    <h2>
+                        MERN Ecommerce Site
+                    </h2>
+                </Link>
             </div>
             <ul className='navbar__links'>
                 <li>
@@ -34,6 +36,11 @@ const Navbar = ({click}) => {
                 <li>
                     <Link to='/'>
                         Shop
+                    </Link>
+                </li>
+                <li>
+                    <Link to='/login'>
+                        Log In
                     </Link>
                 </li>
             </ul>

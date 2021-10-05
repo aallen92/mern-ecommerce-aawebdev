@@ -9,9 +9,10 @@
   z-index: 50;
 }
 
-.navbar__logo > h2 {
+.navbar__logo > a {
   color: #f4f4f4;
   font-size: 1.4rem;
+  text-decoration: none;
 }
 
 .navbar__links {
