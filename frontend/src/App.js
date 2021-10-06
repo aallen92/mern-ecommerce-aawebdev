@@ -53,7 +53,7 @@ function App() {
     else {
       dispatch(signOutUser());
     }
-  },[dispatch, user]);
+  },[dispatch]);
 
   return (
     <Router>
