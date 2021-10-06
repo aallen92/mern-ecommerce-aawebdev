@@ -17,7 +17,7 @@ const SideDrawer = ({show, click}) => {
     const cart = useSelector(state => state.cart);
 
     const { cartItems } = cart;
-    const signedIn = user.signedIn.signedIn
+    const signedIn = user.signedIn
 
 
     const getCartCount = () => {

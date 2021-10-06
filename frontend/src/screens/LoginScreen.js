@@ -11,6 +11,7 @@ const LoginScreen = ({ history }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
@@ -30,13 +31,15 @@ const LoginScreen = ({ history }) => {
 
     try {
       const { data } = await axios.post(
-        'http://localhost:5000/api/auth/login',
+        'https://mern-ecommerce-aawebdev.herokuapp.com/api/auth/login',
         { email, password },
         config
       );
 
       localStorage.setItem("authToken", data.token);
-      dispatch(signInUser());
+      dispatch(signInUser({
+        user: data.user,
+      }));
       console.log(data.user);
       history.push("/");
       

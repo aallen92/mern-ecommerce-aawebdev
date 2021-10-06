@@ -12,7 +12,7 @@ const Navbar = ({ click }) => {
     const dispatch = useDispatch();
 
     const { cartItems } = cart;
-    const signedIn = user.signedIn.signedIn
+    const signedIn = user.user.signedIn
     
 
     const getCartCount = () => {

@@ -1,18 +1,16 @@
 import * as actionTypes from '../constants/userConstants';
 
-export const userReducer = (state = { signedIn: false }, action) => {
+export const userReducer = (state = { user: [] }, action) => {
     switch(action.type) {
         case actionTypes.SIGN_IN_USER:
-            const signedIn = action.payload;
 
             return {
-                signedIn: signedIn,
+                user: action.payload,
             }
         
         case actionTypes.SIGN_OUT_USER:
-            const signedOut = action.payload;
             return {
-                signedIn: signedOut,
+                user: action.payload,
             }
 
         default:
