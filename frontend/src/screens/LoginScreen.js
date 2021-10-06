@@ -36,9 +36,10 @@ const LoginScreen = ({ history }) => {
       );
 
       localStorage.setItem("authToken", data.token);
-      dispatch(signInUser(true));
+      dispatch(signInUser());
       console.log(data.user);
       history.push("/");
+      
     } catch (error) {
       setError(error.response.data.error);
       setTimeout(() => {

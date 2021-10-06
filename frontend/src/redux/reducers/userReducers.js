@@ -2,11 +2,11 @@ import * as actionTypes from '../constants/userConstants';
 
 export const userReducer = (state = { signedIn: false }, action) => {
     switch(action.type) {
-        case actionTypes.SIGN_IN_USER_REQUEST:
+        case actionTypes.SIGN_IN_USER:
+            const signedIn = action.payload;
+
             return {
-                loading: true,
-                signedIn: false,
-                products: []
+                signedIn: signedIn,
             }
         
         case actionTypes.SIGN_OUT_USER:
