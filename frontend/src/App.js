@@ -7,11 +7,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
-import PrivateScreen from './screens/PrivateScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
+import AccountScreen from './screens/AccountScreen';
 
 // Components
 import Navbar from './components/Navbar';
@@ -19,9 +19,9 @@ import Backdrop from './components/Backdrop';
 import SideDrawer from './components/SideDrawer';
 
 // Routing
-import PrivateRoute from './components/routing/PrivateRoute';
 import { signInUser, signOutUser } from './redux/actions/userActions';
 import { useDispatch } from 'react-redux';
+import CheckoutScreen from './screens/CheckoutScreen';
 
 function App() {
 
@@ -44,19 +44,17 @@ function App() {
       <Backdrop show={sideToggle} click={() => setSideToggle(false)} />
       <main>
         <Switch>
-          <PrivateRoute exact path="/private" component={PrivateScreen} />
           <Route exact path="/" component={HomeScreen} />
-          <Route exact path="/product/:id" component={ProductScreen} />
-          <Route exact path="/cart" component={CartScreen} />
           <Route exact path="/login" component={LoginScreen} />
           <Route exact path="/register" component={RegisterScreen} />
           <Route exact path="/forgotpassword" component={ForgotPasswordScreen} />
           <Route exact path="/passwordreset/:resetToken" component={ResetPasswordScreen} />
+          <Route exact path="/account" component={AccountScreen} />
+          <Route exact path="/product/:id" component={ProductScreen} />
+          <Route exact path="/cart" component={CartScreen} />
+          <Route exact path="/checkout" component={CheckoutScreen} />
         </Switch>
       </main>
-      {/* HomeScreen */}
-      {/* ProductScreen */}
-      {/* CartScreen */}
     </Router>
   );
 }

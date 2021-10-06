@@ -35,16 +35,17 @@
   padding: 8px;
 }
 
-.cartscreen__right > div > button {
+.cartscreen__right > div > a {
   padding: 10px 17px;
   width: 100%;
   background: #171717;
   color: #f4f4f4;
   border: 1px solid #171717;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.cartscreen__right > div > button:hover {
+.cartscreen__right > div > a:hover {
   opacity: 0.9;
 }
 

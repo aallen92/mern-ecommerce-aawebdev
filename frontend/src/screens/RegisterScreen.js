@@ -2,6 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./RegisterScreen.css";
+import { useDispatch } from "react-redux";
+import { signInUser } from "../redux/actions/userActions";
+
 
 const RegisterScreen = ({ history }) => {
   const [username, setUsername] = useState("");
@@ -9,6 +12,7 @@ const RegisterScreen = ({ history }) => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -40,6 +44,7 @@ const RegisterScreen = ({ history }) => {
       );
 
       localStorage.setItem("authToken", data.token);
+      dispatch(signInUser());
 
       history.push("/");
     } catch (error) {
@@ -56,12 +61,12 @@ const RegisterScreen = ({ history }) => {
         <h3 className="register-screen__title">Register</h3>
         {error && <span className="error-message">{error}</span>}
         <div className="form-group">
-          <label htmlFor="name">Username:</label>
+          <label htmlFor="name">Name:</label>
           <input
             type="text"
             required
             id="name"
-            placeholder="Enter username"
+            placeholder="Enter your name"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />

@@ -5,6 +5,7 @@ import "./LoginScreen.css";
 import { useDispatch } from "react-redux";
 import { signInUser } from "../redux/actions/userActions";
 
+
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,13 +30,14 @@ const LoginScreen = ({ history }) => {
 
     try {
       const { data } = await axios.post(
-        "https://mern-ecommerce-aawebdev.herokuapp.com/api/auth/login",
+        'http://localhost:5000/api/auth/login',
         { email, password },
         config
       );
 
       localStorage.setItem("authToken", data.token);
       dispatch(signInUser(true));
+      console.log(data.user);
       history.push("/");
     } catch (error) {
       setError(error.response.data.error);

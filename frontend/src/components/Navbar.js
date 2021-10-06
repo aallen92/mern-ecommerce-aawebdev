@@ -30,7 +30,7 @@ const Navbar = ({ click }) => {
            <div className='navbar__logo'>
                <Link to='/'>
                     <h2>
-                        MERN Ecommerce Site
+                        aaWebDev Ecommerce Site
                     </h2>
                 </Link>
             </div>
@@ -49,6 +49,11 @@ const Navbar = ({ click }) => {
                 <li>
                     <Link to='/'>
                         Shop
+                    </Link>
+                </li>
+                <li className={signedIn ? "" : "hidden"}>
+                    <Link to='/account'>
+                        Account
                     </Link>
                 </li>
                 <li className={signedIn ? "hidden" : ""}>

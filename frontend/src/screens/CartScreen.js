@@ -56,9 +56,9 @@ const CartScreen = () => {
                     </p>
                 </div>
                 <div>
-                    <button>
+                    <Link to='/checkout'>
                         Proceed To Checkout
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>
