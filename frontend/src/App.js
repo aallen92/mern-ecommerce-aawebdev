@@ -28,7 +28,6 @@ function App() {
 
   const [sideToggle, setSideToggle] = useState(false);
   const dispatch = useDispatch();
-  const [user, setUser] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
