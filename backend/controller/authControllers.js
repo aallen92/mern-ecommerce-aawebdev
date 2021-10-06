@@ -2,6 +2,7 @@ const User = require('../models/Users');
 const ErrorResponse = require('../utils/errorResponse');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
 exports.register = async (req, res, next) => {
     const {username, email, password} = req.body;
