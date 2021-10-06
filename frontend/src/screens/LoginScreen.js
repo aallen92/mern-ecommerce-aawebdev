@@ -11,7 +11,6 @@ const LoginScreen = ({ history }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const [user, setUser] = useState("");
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
@@ -37,10 +36,12 @@ const LoginScreen = ({ history }) => {
       );
 
       localStorage.setItem("authToken", data.token);
+      localStorage.setItem("userEmail", data.user.email);
+
       dispatch(signInUser({
         user: data.user,
       }));
-      console.log(data.user);
+      console.log(data.user.email);
       history.push("/");
       
     } catch (error) {

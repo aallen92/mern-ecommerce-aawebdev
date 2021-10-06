@@ -9,17 +9,21 @@ const HomeScreen = () => {
 
     const dispatch = useDispatch();
 
+    const auth = useSelector(state => state.user);
     const getProducts = useSelector(state => state.getProducts);
     const { products, loading, error } = getProducts;
-    
+
+    const user = auth?.user?.user?.user;
+
     useEffect(() => {
         dispatch(listProducts())
-    }, [dispatch]);
+        console.log(user);
+    }, [dispatch, user]);
 
     return (
         <div className='homescreen'>
             <h2 className='homescreen__title'>
-                Latest Products
+                Latest Products {user?.username}
             </h2>
 
             <div className='homescreen__products'>

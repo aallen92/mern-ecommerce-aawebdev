@@ -1,6 +1,7 @@
 import './App.css';
 import {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
 
 
 // Screens
@@ -27,15 +28,32 @@ function App() {
 
   const [sideToggle, setSideToggle] = useState(false);
   const dispatch = useDispatch();
-  
+  const [user, setUser] = useState([]);
+
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
-        dispatch(signInUser());
+      const fetchUser = async () => {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        };
+  
+        try {
+          const { data } = await axios.get("https://mern-ecommerce-aawebdev.herokuapp.com/api/auth/userbyid", config);
+          setUser(data.user);
+        } catch (error) {
+          localStorage.removeItem("authToken");
+        }
+      };
+      fetchUser();
+      dispatch(signInUser(user));
     }
     else {
       dispatch(signOutUser());
     }
-  },[dispatch]);
+  },[dispatch, user]);
 
   return (
     <Router>
