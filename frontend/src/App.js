@@ -42,13 +42,13 @@ function App() {
   
         try {
           const { data } = await axios.get("https://mern-ecommerce-aawebdev.herokuapp.com/api/auth/userbyid", config);
-          setUser(data.user);
+          dispatch(signInUser(data.user));
         } catch (error) {
           localStorage.removeItem("authToken");
         }
       };
       fetchUser();
-      dispatch(signInUser(user));
+      
     }
     else {
       dispatch(signOutUser());
