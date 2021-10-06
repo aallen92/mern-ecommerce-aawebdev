@@ -145,7 +145,7 @@ exports.userById = async (req, res, next) => {
         
         next();
     } catch (error) {
-        return next(new ErrorResponse("Not authorised to access this route", 401));
+        return next(new ErrorResponse(error, 401));
     }
 }
 
