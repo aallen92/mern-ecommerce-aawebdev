@@ -27,11 +27,6 @@ const CheckoutScreen = () => {
         city: "",
         postcode: "",
     });
-    const [paymentDetails, setPaymentDetails] = useState({
-        cardNumber: "",
-        expiryDate: "",
-        cvc: "",
-    })
 
     const [hideBilling, setHideBilling] = useState(false);
 
@@ -45,11 +40,11 @@ const CheckoutScreen = () => {
     const removeFromCartHandler = (id) => {
         dispatch(removeFromCart(id));
     };
-    
+
     const payNowClick = () => {
         console.log(buyerDetails);
         console.log(shippingAddress);
-        if(hideBilling) {
+        if (hideBilling) {
             setBillingAddress({
                 addressOne: shippingAddress.addressOne,
                 addressTwo: shippingAddress.addressTwo,
@@ -58,7 +53,6 @@ const CheckoutScreen = () => {
             });
         }
         console.log(billingAddress);
-        console.log(paymentDetails);
     }
 
     return (
@@ -77,44 +71,44 @@ const CheckoutScreen = () => {
                         <label>
                             First name:
                         </label>
-                        <input 
+                        <input
                             type="text"
                             placeholder="Enter first name"
                             value={buyerDetails.firstName}
-                            onChange={(e) => setBuyerDetails({...buyerDetails, firstName: (e.target.value)})}
+                            onChange={(e) => setBuyerDetails({ ...buyerDetails, firstName: (e.target.value) })}
                         />
                     </div>
                     <div className='checkoutscreen__formOption'>
                         <label>
                             Last name:
                         </label>
-                        <input 
+                        <input
                             type="text"
                             placeholder="Enter last name"
                             value={buyerDetails.lastName}
-                            onChange={(e) => setBuyerDetails({...buyerDetails, lastName: (e.target.value)})}
+                            onChange={(e) => setBuyerDetails({ ...buyerDetails, lastName: (e.target.value) })}
                         />
                     </div>
                     <div className='checkoutscreen__formOption'>
                         <label>
                             Contact Number:
                         </label>
-                        <input 
+                        <input
                             type="text"
                             placeholder="Enter contact Number"
                             value={buyerDetails.contactNumber}
-                            onChange={(e) => setBuyerDetails({...buyerDetails, contactNumber: (e.target.value)})}
+                            onChange={(e) => setBuyerDetails({ ...buyerDetails, contactNumber: (e.target.value) })}
                         />
                     </div>
                     <div className='checkoutscreen__formOption'>
                         <label>
                             Email Address:
                         </label>
-                        <input 
+                        <input
                             type="text"
                             placeholder="Enter email address"
                             value={buyerDetails.email}
-                            onChange={(e) => setBuyerDetails({...buyerDetails, email: (e.target.value)})}
+                            onChange={(e) => setBuyerDetails({ ...buyerDetails, email: (e.target.value) })}
                         />
                     </div>
                 </form>
@@ -129,44 +123,44 @@ const CheckoutScreen = () => {
                         <label>
                             Address Line One
                         </label>
-                        <input 
+                        <input
                             type="text"
                             placeholder="Enter Address Line One"
                             value={shippingAddress.addressone}
-                            onChange={(e) => setShippingAddress({...shippingAddress, addressOne: (e.target.value)})}
+                            onChange={(e) => setShippingAddress({ ...shippingAddress, addressOne: (e.target.value) })}
                         />
                     </div>
                     <div className="checkoutscreen__formOption">
                         <label>
                             Address Line Two
                         </label>
-                        <input 
+                        <input
                             type="text"
                             placeholder="Enter Address Line Two"
                             value={shippingAddress.addressTwo}
-                            onChange={(e) => setShippingAddress({...shippingAddress, addressTwo: (e.target.value)})}
+                            onChange={(e) => setShippingAddress({ ...shippingAddress, addressTwo: (e.target.value) })}
                         />
                     </div>
                     <div className="checkoutscreen__formOption">
                         <label>
                             Town/City
                         </label>
-                        <input 
+                        <input
                             type="text"
                             placeholder="Enter Town/City"
                             value={shippingAddress.city}
-                            onChange={(e) => setShippingAddress({...shippingAddress, city: (e.target.value)})}
+                            onChange={(e) => setShippingAddress({ ...shippingAddress, city: (e.target.value) })}
                         />
                     </div>
                     <div className="checkoutscreen__formOption">
                         <label>
                             Postcode
                         </label>
-                        <input 
+                        <input
                             type="text"
                             placeholder="Enter Postcode"
                             value={shippingAddress.postcode}
-                            onChange={(e) => setShippingAddress({...shippingAddress, postcode: (e.target.value)})}
+                            onChange={(e) => setShippingAddress({ ...shippingAddress, postcode: (e.target.value) })}
                         />
                     </div>
                 </form>
@@ -174,7 +168,7 @@ const CheckoutScreen = () => {
                     Billing Address
                 </h4>
                 <div>
-                    <input 
+                    <input
                         type="checkbox"
                         value={hideBilling}
                         onChange={() => setHideBilling(!hideBilling)}
@@ -184,52 +178,52 @@ const CheckoutScreen = () => {
                     </label>
                 </div>
                 {hideBilling ? "" : (
-                <form className="checkoutscreen__form">
-                    <div className="checkoutscreen__formOption">
-                        <label>
-                            Address Line One
-                        </label>
-                        <input 
-                            type="text"
-                            placeholder="Enter Address Line One"
-                            value={billingAddress.addressOne}
-                            onChange={(e) => setBillingAddress({...billingAddress, addressOne: (e.target.value)})}
-                        />
-                    </div>
-                    <div className="checkoutscreen__formOption">
-                        <label>
-                            Address Line Two
-                        </label>
-                        <input 
-                            type="text"
-                            placeholder="Enter Address Line Two"
-                            value={billingAddress.addressTwo}
-                            onChange={(e) => setBillingAddress({...billingAddress, addressTwo: (e.target.value)})}
-                        />
-                    </div>
-                    <div className="checkoutscreen__formOption">
-                        <label>
-                            Town/City
-                        </label>
-                        <input 
-                            type="text"
-                            placeholder="Enter Town/City"
-                            value={billingAddress.city}
-                            onChange={(e) => setBillingAddress({...billingAddress, city: (e.target.value)})}
-                        />
-                    </div>
-                    <div className="checkoutscreen__formOption">
-                        <label>
-                            Postcode
-                        </label>
-                        <input 
-                            type="text"
-                            placeholder="Enter Postcode"
-                            value={billingAddress.postcode}
-                            onChange={(e) => setBillingAddress({...billingAddress, postcode: (e.target.value)})}
-                        />
-                    </div>
-                </form>
+                    <form className="checkoutscreen__form">
+                        <div className="checkoutscreen__formOption">
+                            <label>
+                                Address Line One
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Enter Address Line One"
+                                value={billingAddress.addressOne}
+                                onChange={(e) => setBillingAddress({ ...billingAddress, addressOne: (e.target.value) })}
+                            />
+                        </div>
+                        <div className="checkoutscreen__formOption">
+                            <label>
+                                Address Line Two
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Enter Address Line Two"
+                                value={billingAddress.addressTwo}
+                                onChange={(e) => setBillingAddress({ ...billingAddress, addressTwo: (e.target.value) })}
+                            />
+                        </div>
+                        <div className="checkoutscreen__formOption">
+                            <label>
+                                Town/City
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Enter Town/City"
+                                value={billingAddress.city}
+                                onChange={(e) => setBillingAddress({ ...billingAddress, city: (e.target.value) })}
+                            />
+                        </div>
+                        <div className="checkoutscreen__formOption">
+                            <label>
+                                Postcode
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Enter Postcode"
+                                value={billingAddress.postcode}
+                                onChange={(e) => setBillingAddress({ ...billingAddress, postcode: (e.target.value) })}
+                            />
+                        </div>
+                    </form>
                 )}
             </div>
             <div className='checkoutscreen__right'>
@@ -237,20 +231,20 @@ const CheckoutScreen = () => {
                     Order Summary
                 </h2>
                 <div>
-                {cartItems.length === 0 ? (
-                    <div>
-                        Your cart is empty <Link to="/">Go Back</Link>
-                    </div>
-                ) : ( 
-                    cartItems.map((item) => 
-                    <div>
-                        <h3>
-                            Cart Items
-                        </h3>
-                        <CartItem key={item.product} item={item} qtyChangeHandler={qtyChangeHandler} removeFromCart={removeFromCartHandler} />
-                    </div>
-                    )
-                )}
+                    {cartItems.length === 0 ? (
+                        <div>
+                            Your cart is empty <Link to="/">Go Back</Link>
+                        </div>
+                    ) : (
+                        cartItems.map((item) =>
+                            <div>
+                                <h3>
+                                    Cart Items
+                                </h3>
+                                <CartItem key={item.product} item={item} qtyChangeHandler={qtyChangeHandler} removeFromCart={removeFromCartHandler} />
+                            </div>
+                        )
+                    )}
                 </div>
                 <div>
                     <h3>
@@ -258,7 +252,7 @@ const CheckoutScreen = () => {
                     </h3>
                     <CheckoutForm />
                 </div>
-                <button 
+                <button
                     className="checkoutscreen__payNowButton"
                     onClick={payNowClick}
                 >

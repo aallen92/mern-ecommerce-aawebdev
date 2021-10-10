@@ -21,7 +21,7 @@ export default function CheckoutForm() {
     dispatch(createPaymentIntent());
     setClientSecret(paymentIntent);
     console.log(clientSecret);
-  }, []);
+  }, [dispatch, clientSecret, paymentIntent]);
 
   const cardStyle = {
     style: {
