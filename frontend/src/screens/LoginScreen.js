@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./LoginScreen.css";
 import { useDispatch } from "react-redux";
-import { signInUser } from "../redux/actions/userActions";
+import { signInUser } from "../redux/actions/authActions";
 
 
 const LoginScreen = ({ history }) => {
@@ -43,7 +43,7 @@ const LoginScreen = ({ history }) => {
       }));
       console.log(data.user.email);
       history.push("/");
-      
+
     } catch (error) {
       setError(error.response.data.error);
       setTimeout(() => {

@@ -2,22 +2,22 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './SideDrawer.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { signOutUser } from '../redux/actions/userActions';
+import { signOutUser } from '../redux/actions/authActions';
 
 
-const SideDrawer = ({show, click}) => {
+const SideDrawer = ({ show, click }) => {
     const sideDrawerClass = ["sidedrawer"];
     const dispatch = useDispatch();
 
-    if(show) {
+    if (show) {
         sideDrawerClass.push("show");
     }
 
-    const user = useSelector(state => state.user);
+    const auth = useSelector(state => state.auth);
     const cart = useSelector(state => state.cart);
 
     const { cartItems } = cart;
-    const signedIn = user.user.signedIn
+    const signedIn = auth.signedIn
 
 
     const getCartCount = () => {

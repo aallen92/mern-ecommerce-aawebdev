@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./RegisterScreen.css";
 import { useDispatch } from "react-redux";
-import { signInUser } from "../redux/actions/userActions";
+import { signInUser } from "../redux/actions/authActions";
 
 
 const RegisterScreen = ({ history }) => {

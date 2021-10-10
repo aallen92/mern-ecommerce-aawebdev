@@ -1,9 +1,9 @@
 import './App.css';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 
 // Screens
@@ -22,7 +22,7 @@ import Backdrop from './components/Backdrop';
 import SideDrawer from './components/SideDrawer';
 
 // Routing
-import { signInUser, signOutUser } from './redux/actions/userActions';
+import { signInUser, signOutUser } from './redux/actions/authActions';
 import { useDispatch } from 'react-redux';
 import CheckoutScreen from './screens/CheckoutScreen';
 
@@ -32,7 +32,7 @@ function App() {
 
   const [sideToggle, setSideToggle] = useState(false);
   const dispatch = useDispatch();
-  
+
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
@@ -43,7 +43,7 @@ function App() {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
         };
-  
+
         try {
           const { data } = await axios.get("https://mern-ecommerce-aawebdev.herokuapp.com/api/auth/userbyid", config);
           dispatch(signInUser(data.user));
@@ -52,33 +52,33 @@ function App() {
         }
       };
       fetchUser();
-      
+
     }
     else {
       dispatch(signOutUser());
     }
-  },[dispatch]);
+  }, [dispatch]);
 
   return (
     <Elements stripe={stripePromise}>
-    <Router>
-      <Navbar click={() => setSideToggle(true)} />
-      <SideDrawer show={sideToggle} click={() => setSideToggle(false)} />
-      <Backdrop show={sideToggle} click={() => setSideToggle(false)} />
-      <main>
-        <Switch>
-          <Route exact path="/" component={HomeScreen} />
-          <Route exact path="/login" component={LoginScreen} />
-          <Route exact path="/register" component={RegisterScreen} />
-          <Route exact path="/forgotpassword" component={ForgotPasswordScreen} />
-          <Route exact path="/passwordreset/:resetToken" component={ResetPasswordScreen} />
-          <Route exact path="/account" component={AccountScreen} />
-          <Route exact path="/product/:id" component={ProductScreen} />
-          <Route exact path="/cart" component={CartScreen} />
-          <Route exact path="/checkout" component={CheckoutScreen} />
-        </Switch>
-      </main>
-    </Router>
+      <Router>
+        <Navbar click={() => setSideToggle(true)} />
+        <SideDrawer show={sideToggle} click={() => setSideToggle(false)} />
+        <Backdrop show={sideToggle} click={() => setSideToggle(false)} />
+        <main>
+          <Switch>
+            <Route exact path="/" component={HomeScreen} />
+            <Route exact path="/login" component={LoginScreen} />
+            <Route exact path="/register" component={RegisterScreen} />
+            <Route exact path="/forgotpassword" component={ForgotPasswordScreen} />
+            <Route exact path="/passwordreset/:resetToken" component={ResetPasswordScreen} />
+            <Route exact path="/account" component={AccountScreen} />
+            <Route exact path="/product/:id" component={ProductScreen} />
+            <Route exact path="/cart" component={CartScreen} />
+            <Route exact path="/checkout" component={CheckoutScreen} />
+          </Switch>
+        </main>
+      </Router>
     </Elements>
   );
 }

@@ -2,18 +2,18 @@ import React from 'react'
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signOutUser } from '../redux/actions/userActions';
+import { signOutUser } from '../redux/actions/authActions';
 
 
 const Navbar = ({ click }) => {
 
-    const user = useSelector(state => state.user);
+    const auth = useSelector(state => state.auth);
     const cart = useSelector(state => state.cart);
     const dispatch = useDispatch();
 
     const { cartItems } = cart;
-    const signedIn = user.user.signedIn
-    
+    const signedIn = auth.signedIn
+
 
     const getCartCount = () => {
         return cartItems.reduce((qty, item) => qty + Number(item.qty), 0);
@@ -27,8 +27,8 @@ const Navbar = ({ click }) => {
 
     return (
         <nav className='navbar'>
-           <div className='navbar__logo'>
-               <Link to='/'>
+            <div className='navbar__logo'>
+                <Link to='/'>
                     <h2>
                         aaWebDev Ecommerce Site
                     </h2>

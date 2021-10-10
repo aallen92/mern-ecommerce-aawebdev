@@ -10,7 +10,8 @@ export const createPaymentIntentReducer = (state = { clientSecret: "" }, action)
         case actionTypes.CREATE_PAYMENT_INTENT_SUCCESS:
             return {
                 loading: false,
-                clientSecret: action.payload
+                clientSecret: action.payload.clientSecret,
+                amount: action.payload.amount
             }
         case actionTypes.CREATE_PAYMENT_INTENT_FAILURE:
             return {

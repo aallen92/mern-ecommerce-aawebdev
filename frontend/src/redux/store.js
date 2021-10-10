@@ -5,11 +5,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 // Reducers
 import { cartReducer } from './reducers/cartReducers';
 import { getProductDetailsReducer, getProductsReducer } from './reducers/productReducers';
-import { userReducer } from './reducers/userReducers';
+import { authReducer } from './reducers/authReducers';
 import { createPaymentIntentReducer } from './reducers/checkoutReducers';
 
 const reducer = combineReducers({
-    user: userReducer,
+    auth: authReducer,
     cart: cartReducer,
     getProducts: getProductsReducer,
     getProductDetails: getProductDetailsReducer,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
@@ -9,12 +9,18 @@ import './CheckoutScreen.css';
 const CheckoutScreen = () => {
     const dispatch = useDispatch();
 
+    const auth = useSelector(state => state.auth);
+
+    const user = auth.user;
+
     const [buyerDetails, setBuyerDetails] = useState({
         firstName: "",
         lastName: "",
         contactNumber: "",
         email: "",
+        userID: "",
     });
+
     const [shippingAddress, setShippingAddress] = useState({
         addressOne: "",
         addressTwo: "",
@@ -40,21 +46,6 @@ const CheckoutScreen = () => {
     const removeFromCartHandler = (id) => {
         dispatch(removeFromCart(id));
     };
-
-    const payNowClick = () => {
-        console.log(buyerDetails);
-        console.log(shippingAddress);
-        if (hideBilling) {
-            setBillingAddress({
-                addressOne: shippingAddress.addressOne,
-                addressTwo: shippingAddress.addressTwo,
-                city: shippingAddress.city,
-                postcode: shippingAddress.postcode,
-            });
-        }
-        console.log(billingAddress);
-    }
-
     return (
         <div className='checkoutscreen'>
             <div className='checkoutscreen__top'>
@@ -237,11 +228,11 @@ const CheckoutScreen = () => {
                         </div>
                     ) : (
                         cartItems.map((item) =>
-                            <div>
+                            <div key={item.product}>
                                 <h3>
                                     Cart Items
                                 </h3>
-                                <CartItem key={item.product} item={item} qtyChangeHandler={qtyChangeHandler} removeFromCart={removeFromCartHandler} />
+                                <CartItem item={item} qtyChangeHandler={qtyChangeHandler} removeFromCart={removeFromCartHandler} />
                             </div>
                         )
                     )}
@@ -250,14 +241,13 @@ const CheckoutScreen = () => {
                     <h3>
                         Payment Details
                     </h3>
-                    <CheckoutForm />
+                    <CheckoutForm
+                        shippingAddress={shippingAddress}
+                        billingAddress={billingAddress}
+                        buyerDetails={buyerDetails}
+                        cartItems={cartItems}
+                    />
                 </div>
-                <button
-                    className="checkoutscreen__payNowButton"
-                    onClick={payNowClick}
-                >
-                    Pay Now
-                </button>
             </div>
         </div>
     )
