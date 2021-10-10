@@ -5,7 +5,8 @@ const connectDB = require('./config/db');
 const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes');
 const privateRoutes = require('./routes/privateRoutes');
-const errorHandler = require('./middleware/error')
+const checkoutRoutes = require('./routes/checkoutRoutes');
+const errorHandler = require('./middleware/error');
 
 connectDB();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use('/api/products', productRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/private', privateRoutes)
+app.use('/api/checkout', checkoutRoutes)
 
 // Error Handler (Should be last piece of middleware)
 

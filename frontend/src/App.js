@@ -2,6 +2,8 @@ import './App.css';
 import {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 
 
 // Screens
@@ -24,10 +26,13 @@ import { signInUser, signOutUser } from './redux/actions/userActions';
 import { useDispatch } from 'react-redux';
 import CheckoutScreen from './screens/CheckoutScreen';
 
+const stripePromise = loadStripe("pk_test_51Jimn1AuWhOT7FbIarv3j682dY1bbkK4QpSN5siIWnW3iXZKDcQL3fN7U7dOxlIAkEARDZv2lEV9ZNj8Gbym1s5z00YHOQlRAL");
+
 function App() {
 
   const [sideToggle, setSideToggle] = useState(false);
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
@@ -55,6 +60,7 @@ function App() {
   },[dispatch]);
 
   return (
+    <Elements stripe={stripePromise}>
     <Router>
       <Navbar click={() => setSideToggle(true)} />
       <SideDrawer show={sideToggle} click={() => setSideToggle(false)} />
@@ -73,6 +79,7 @@ function App() {
         </Switch>
       </main>
     </Router>
+    </Elements>
   );
 }
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
+import CheckoutForm from '../components/CheckoutForm';
 import { addToCart, removeFromCart } from '../redux/actions/cartActions';
 import './CheckoutScreen.css';
 
@@ -255,41 +256,7 @@ const CheckoutScreen = () => {
                     <h3>
                         Payment Details
                     </h3>
-                    <form className='checkoutscreen__form'>
-                        <div className='checkoutscreen__formOption'>
-                            <label>
-                                Card Number
-                            </label>
-                            <input 
-                                type='text'
-                                placeholder='Enter full card number'
-                                value={paymentDetails.cardNumber}
-                                onChange={(e) => setPaymentDetails({...paymentDetails, cardNumber: (e.target.value)})}
-                            />
-                        </div>
-                        <div className='checkoutscreen__formOption'>
-                            <label>
-                                Expiry Date
-                            </label>
-                            <input 
-                                type='text'
-                                placeholder='Enter expiry date'
-                                value={paymentDetails.expiryDate}
-                                onChange={(e) => setPaymentDetails({...paymentDetails, expiryDate: (e.target.value)})}
-                            />
-                        </div>
-                        <div className='checkoutscreen__formOption'>
-                            <label>
-                                CVC
-                            </label>
-                            <input 
-                                type='text'
-                                placeholder='Enter CVC'
-                                value={paymentDetails.cvc}
-                                onChange={(e) => setPaymentDetails({...paymentDetails, cvc: (e.target.value)})}
-                            />
-                        </div>
-                    </form>
+                    <CheckoutForm />
                 </div>
                 <button 
                     className="checkoutscreen__payNowButton"

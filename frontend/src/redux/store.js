@@ -6,12 +6,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { cartReducer } from './reducers/cartReducers';
 import { getProductDetailsReducer, getProductsReducer } from './reducers/productReducers';
 import { userReducer } from './reducers/userReducers';
+import { createPaymentIntentReducer } from './reducers/checkoutReducers';
 
 const reducer = combineReducers({
     user: userReducer,
     cart: cartReducer,
     getProducts: getProductsReducer,
     getProductDetails: getProductDetailsReducer,
+    createPaymentIntentReducer: createPaymentIntentReducer,
 });
 
 const middleware = [thunk];
