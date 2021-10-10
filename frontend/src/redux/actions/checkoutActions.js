@@ -7,7 +7,7 @@ export const createPaymentIntent = (cartItems) => async (dispatch) => {
             type: actionTypes.CREATE_PAYMENT_INTENT_REQUEST,
         })
 
-        axios.post("http://localhost:5000/api/checkout/create-payment-intent", {
+        axios.post("https://mern-ecommerce-aawebdev.herokuapp.com/api/checkout/create-payment-intent", {
             body: JSON.stringify(cartItems)
         })
             .then(res => {
