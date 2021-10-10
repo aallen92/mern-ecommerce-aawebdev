@@ -16,9 +16,7 @@ export default function CheckoutForm({ shippingAddress, billingAddress, buyerDet
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!cartItems.length === 0) {
-      dispatch(createPaymentIntent(cartItems))
-    }
+    dispatch(createPaymentIntent(cartItems))
     console.log(shippingAddress);
     console.log(billingAddress);
     console.log(buyerDetails);
