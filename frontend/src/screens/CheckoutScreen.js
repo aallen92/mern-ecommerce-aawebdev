@@ -9,8 +9,6 @@ import './CheckoutScreen.css';
 const CheckoutScreen = () => {
     const dispatch = useDispatch();
 
-    const auth = useSelector(state => state.auth);
-
     const [buyerDetails, setBuyerDetails] = useState({
         firstName: "",
         lastName: "",
