@@ -5,6 +5,6 @@ const {
     createPaymentIntent,
 } = require('../controller/checkoutControllers');
 
-router.put('/create-payment-intent', createPaymentIntent);
+router.route('/create-payment-intent').post(createPaymentIntent);
 
 module.exports = router;
