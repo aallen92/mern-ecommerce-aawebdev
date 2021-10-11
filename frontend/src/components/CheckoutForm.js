@@ -79,9 +79,9 @@ export default function CheckoutForm({ cartItems, disablePayNow }) {
       ) : (
 
         <form id="payment-form" onSubmit={handleSubmit} className='payment__form'>
-          <CardElement className={succeeded ? "hidden" : "payment__input"} id="card-element" options={cardStyle} onChange={handleChange} />
+          <CardElement className={succeeded || cartItems.length === 0 ? "hidden" : "payment__input"} id="card-element" options={cardStyle} onChange={handleChange} />
           <button
-            className={succeeded ? "hidden" : ""}
+            className={succeeded || cartItems.length === 0 ? "hidden" : ""}
             disabled={processing || disabled}
             id="submit"
           >

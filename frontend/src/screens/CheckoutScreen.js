@@ -263,19 +263,13 @@ const CheckoutScreen = () => {
                     )}
                 </div>
                 <div>
-                    {cartItems.length === 0 ? (
-                        <></>
-                    ) : (
-                        <>
-                            <h3 className='checkoutscreen__subheading'>
-                                Payment Details
-                            </h3>
-                            <CheckoutForm
-                                cartItems={cartItems}
-                                disablePayNow={disablePayNow}
-                            />
-                        </>
-                    )}
+                    <h3 className='checkoutscreen__subheading'>
+                        Payment Details
+                    </h3>
+                    <CheckoutForm
+                        cartItems={cartItems}
+                        disablePayNow={disablePayNow}
+                    />
                 </div>
             </div>
         </div>
