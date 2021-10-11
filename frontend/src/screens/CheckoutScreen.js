@@ -31,6 +31,7 @@ const CheckoutScreen = () => {
     });
 
     const [hideBilling, setHideBilling] = useState(false);
+    const [disablePayNow, setDisablePayNow] = useState(true);
 
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart;
@@ -49,7 +50,7 @@ const CheckoutScreen = () => {
                     Checkout
                 </h2>
             </div>
-            <div className='checkoutscreen__left'>
+            <div className={cartItems.length === 0 ? 'hidden' : 'checkoutscreen__left'}>
                 <h3>
                     Personal Details
                 </h3>
@@ -154,13 +155,17 @@ const CheckoutScreen = () => {
                 <h4>
                     Billing Address
                 </h4>
-                <div>
+                <div className="hideBilling">
                     <input
+                        name="hideBilling"
+                        id="hideBilling"
                         type="checkbox"
                         value={hideBilling}
                         onChange={() => setHideBilling(!hideBilling)}
                     />
-                    <label>
+                    <label
+                        htmlFor="hideBilling"
+                    >
                         Same as shipping
                     </label>
                 </div>
@@ -234,15 +239,19 @@ const CheckoutScreen = () => {
                     )}
                 </div>
                 <div>
-                    <h3>
-                        Payment Details
-                    </h3>
-                    <CheckoutForm
-                        shippingAddress={shippingAddress}
-                        billingAddress={billingAddress}
-                        buyerDetails={buyerDetails}
-                        cartItems={cartItems}
-                    />
+                    {cartItems.length === 0 ? (
+                        <></>
+                    ) : (
+                        <>
+                            <h3>
+                                Payment Details
+                            </h3>
+                            <CheckoutForm
+                                cartItems={cartItems}
+                                disablePayNow={disablePayNow}
+                            />
+                        </>
+                    )}
                 </div>
             </div>
         </div>

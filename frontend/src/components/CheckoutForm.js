@@ -6,7 +6,7 @@ import './CheckoutForm.css';
 import { resetCart } from '../redux/actions/cartActions';
 
 
-export default function CheckoutForm({ shippingAddress, billingAddress, buyerDetails, cartItems }) {
+export default function CheckoutForm({ cartItems, disablePayNow }) {
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState('');
@@ -16,14 +16,8 @@ export default function CheckoutForm({ shippingAddress, billingAddress, buyerDet
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!cartItems.length === 0) {
-      dispatch(createPaymentIntent(cartItems))
-    }
-    console.log(shippingAddress);
-    console.log(billingAddress);
-    console.log(buyerDetails);
-    console.log(cartItems)
-  }, [dispatch, shippingAddress, billingAddress, buyerDetails, cartItems]);
+    dispatch(createPaymentIntent(cartItems));
+  }, [cartItems]);
 
   const cardStyle = {
     style: {
@@ -76,34 +70,43 @@ export default function CheckoutForm({ shippingAddress, billingAddress, buyerDet
 
   return (
     <div>
-      <form id="payment-form" onSubmit={handleSubmit}>
-        <CardElement className={succeeded ? "hidden" : ""} id="card-element" options={cardStyle} onChange={handleChange} />
-        <button
-          className={succeeded ? "hidden" : ""}
-          disabled={processing || disabled}
-          id="submit"
-        >
-          <span id="button-text">
-            {processing ? (
-              <div className="spinner" id="spinner"></div>
-            ) : (
-              "Pay Now"
-            )}
-          </span>
-        </button>
-        {/* Show any error that happens when processing the payment */}
-        {error && (
-          <div className="card-error" role="alert">
-            {error}
-          </div>
-        )}
-        {/* Show a success message upon completion */}
-        <div className={succeeded ? "result-message" : "result-message hidden"}>
+      {disablePayNow ? (
+        <div>
           <p>
-            Payment succeeded!
+            Provide your details to continue to payment
           </p>
         </div>
-      </form>
+      ) : (
+
+        <form id="payment-form" onSubmit={handleSubmit} className='payment__form'>
+          <CardElement className={succeeded ? "hidden" : "payment__input"} id="card-element" options={cardStyle} onChange={handleChange} />
+          <button
+            className={succeeded ? "hidden" : ""}
+            disabled={processing || disabled}
+            id="submit"
+          >
+            <span id="button-text">
+              {processing ? (
+                <div className="spinner" id="spinner"></div>
+              ) : (
+                "Pay Now"
+              )}
+            </span>
+          </button>
+          {/* Show any error that happens when processing the payment */}
+          {error && (
+            <div className="card-error" role="alert">
+              {error}
+            </div>
+          )}
+          {/* Show a success message upon completion */}
+          <div className={succeeded ? "result-message" : "result-message hidden"}>
+            <p>
+              Payment succeeded!
+            </p>
+          </div>
+        </form>
+      )}
     </div>
   );
 }
