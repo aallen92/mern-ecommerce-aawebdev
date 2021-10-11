@@ -17,7 +17,7 @@ export default function CheckoutForm({ cartItems, disablePayNow }) {
 
   useEffect(() => {
     dispatch(createPaymentIntent(cartItems));
-  }, [cartItems]);
+  }, [cartItems, dispatch]);
 
   const cardStyle = {
     style: {

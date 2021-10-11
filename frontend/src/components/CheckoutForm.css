@@ -150,9 +150,9 @@ button:disabled {
     }
   }
   
-  @media only screen and (max-width: 600px) {
-    form {
-      width: 80vw;
+  @media only screen and (max-width: 960px) {
+    .payment__form {
+      width: 90vw;
     }
   }
   

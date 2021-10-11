@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
@@ -43,15 +43,42 @@ const CheckoutScreen = () => {
     const removeFromCartHandler = (id) => {
         dispatch(removeFromCart(id));
     };
+
+    const hideBillingChange = () => {
+        setHideBilling(!hideBilling)
+        if (!hideBilling) {
+            setBillingAddress({
+                addressOne: shippingAddress.addressOne,
+                addressTwo: shippingAddress.addressTwo,
+                city: shippingAddress.city,
+                postcode: shippingAddress.postcode,
+            });
+        } else {
+            setBillingAddress({
+                addressOne: "",
+                addressTwo: "",
+                city: "",
+                postcode: "",
+            });
+        }
+    }
+
+    useEffect(() => {
+        if (buyerDetails.firstName === "" || buyerDetails.lastName === "" || buyerDetails.email === "" || buyerDetails.contactNumber === "" ||
+            shippingAddress.addressOne === "" || shippingAddress.postcode === "" || billingAddress.addressOne === "" || billingAddress.postcode === "") {
+            setDisablePayNow(true);
+        } else {
+            setDisablePayNow(false);
+        }
+    }, [buyerDetails, shippingAddress, billingAddress]);
+
     return (
         <div className='checkoutscreen'>
-            <div className='checkoutscreen__top'>
-                <h2>
-                    Checkout
-                </h2>
-            </div>
             <div className={cartItems.length === 0 ? 'hidden' : 'checkoutscreen__left'}>
-                <h3>
+                <h2 className='checkoutscreen__heading'>
+                    Order Details
+                </h2>
+                <h3 className='checkoutscreen__subheading'>
                     Personal Details
                 </h3>
                 <form className='checkoutscreen__form'>
@@ -100,12 +127,9 @@ const CheckoutScreen = () => {
                         />
                     </div>
                 </form>
-                <h3>
-                    Shipping & Billing Address
-                </h3>
-                <h4>
+                <h3 className='checkoutscreen__subheading'>
                     Shipping Address
-                </h4>
+                </h3>
                 <form className="checkoutscreen__form">
                     <div className="checkoutscreen__formOption">
                         <label>
@@ -152,16 +176,16 @@ const CheckoutScreen = () => {
                         />
                     </div>
                 </form>
-                <h4>
+                <h3 className='checkoutscreen__subheading'>
                     Billing Address
-                </h4>
+                </h3>
                 <div className="hideBilling">
                     <input
                         name="hideBilling"
                         id="hideBilling"
                         type="checkbox"
                         value={hideBilling}
-                        onChange={() => setHideBilling(!hideBilling)}
+                        onChange={hideBillingChange}
                     />
                     <label
                         htmlFor="hideBilling"
@@ -219,7 +243,7 @@ const CheckoutScreen = () => {
                 )}
             </div>
             <div className='checkoutscreen__right'>
-                <h2>
+                <h2 className='checkoutscreen__heading'>
                     Order Summary
                 </h2>
                 <div>
@@ -230,7 +254,7 @@ const CheckoutScreen = () => {
                     ) : (
                         cartItems.map((item) =>
                             <div key={item.product}>
-                                <h3>
+                                <h3 className='checkoutscreen__subheading'>
                                     Cart Items
                                 </h3>
                                 <CartItem item={item} qtyChangeHandler={qtyChangeHandler} removeFromCart={removeFromCartHandler} />
@@ -243,7 +267,7 @@ const CheckoutScreen = () => {
                         <></>
                     ) : (
                         <>
-                            <h3>
+                            <h3 className='checkoutscreen__subheading'>
                                 Payment Details
                             </h3>
                             <CheckoutForm
